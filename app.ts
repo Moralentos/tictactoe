@@ -6,7 +6,19 @@ let matrix: number[][] = [
     [3, 3, 3,],
 ]
 
-let gameStatus: 1 | 2 | undefined = 1
+const clearButton = document.querySelector('.clearButton');
+
+let gameStatus: 1 | 2 | undefined = undefined
+
+const winState = [[
+    ["x", "x", "x",],
+    ["l", "l", "l",],
+    ["l", "l", "l",],
+], [
+    ["x", "l", "l",],
+    ["l", "x", "l",],
+    ["l", "l", "x",],
+]]
 
 
 const firstPlayerIcon = (): SVGSVGElement => {
@@ -85,12 +97,59 @@ function render(): void {
     console.log("gamestatus: " + gameStatus);
 }
 
+function checkWinState(): void {
+    let counter = 0;
+    for (let state = 0; state < winState.length; state++) {
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[i].length; j++) {
+                if (matrix[i][j] === 1 && winState[state][i][j] === "x")
+                    counter += 1
+                // console.log(matrix[i][j]);
+            }
+        }
+
+    }
+    console.log("Найдено: " + counter);
+
+}
+
+function startGame(): void {
+    if (!gameStatus) {
+        const number = getRandomNumber(1, 2)
+        if (number === 1 || number === 2) {
+            gameStatus = number
+            console.log(gameStatus);
+
+        }
+        render()
+    }
+}
+function EndGame(): void {
+    if (gameStatus) {
+        gameStatus = undefined
+        clearCells()
+    }
+}
+
+function clearCells(): void {
+    for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[i].length; j++) {
+            matrix[i][j] = 3;
+            // console.log(matrix[i][j]);
+        }
+    }
+    render();
+}
+
+function getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function cellClick(): void {
     const block = document.querySelectorAll('.block');
 
     block.forEach((block, index) => {
-        block.addEventListener('click', () => {
+        gameStatus && block.addEventListener('click', () => {
             console.log("LINE: " + getLineCells(index));
             console.log("Elem: " + getElemCells(index));
             const line = getLineCells(index)
@@ -108,6 +167,9 @@ function cellClick(): void {
             render()
             // cellClick()
             console.log(matrix);
+            checkWinState()
+
+
 
         });
     });

@@ -56,6 +56,38 @@ header {
   font-size: 20px !important;
 }
 
+.player {
+  white-space: nowrap !important;
+}
+
+.header-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 15px 0 15px;
+}
+
+.header-btn > button {
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: var(--white);
+  color: #202135;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.header-btn > button:last-child {
+  margin-bottom: 0;
+}
+
+.header-btn > button:hover {
+  background-color: rgb(243, 238, 226);
+}
+
 main {
   height: 500px;
 
