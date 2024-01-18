@@ -7,8 +7,10 @@ let matrix: number[][] = [
 ]
 
 const clearButton = document.querySelector('.clearButton');
+const statusInfo = document.querySelector('.player')
 
 let gameStatus: 1 | 2 | undefined = undefined
+let step: number = 0
 
 const winState = [[
     ["x", "x", "x",],
@@ -18,7 +20,12 @@ const winState = [[
     ["x", "l", "l",],
     ["l", "x", "l",],
     ["l", "l", "x",],
-]]
+], [
+    ["x", "l", "l",],
+    ["x", "l", "l",],
+    ["x", "l", "l",],
+]
+]
 
 
 const firstPlayerIcon = (): SVGSVGElement => {
@@ -97,19 +104,31 @@ function render(): void {
     console.log("gamestatus: " + gameStatus);
 }
 
+
 function checkWinState(): void {
     let counter = 0;
+    let checkNullCells: boolean = false;
+    let counterWinState: number[] = [];
     for (let state = 0; state < winState.length; state++) {
+        counter = 0
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] === 1 && winState[state][i][j] === "x")
+                if (matrix[i][j] === 1 && winState[state][i][j] === "x") {
                     counter += 1
+                    counterWinState[state] = counter
+                }
                 // console.log(matrix[i][j]);
+                if (matrix[i][j] !== 3) checkNullCells = true
             }
         }
 
     }
+    if (step === 9) {
+        checkNullCells && statusInfo && (statusInfo.innerHTML = "Ничья")
+    }
+
     console.log("Найдено: " + counter);
+    console.log(counterWinState);
 
 }
 
@@ -163,7 +182,7 @@ function cellClick(): void {
                 gameStatus = 1
             }
             // removeCells()
-
+            step += 1
             render()
             // cellClick()
             console.log(matrix);

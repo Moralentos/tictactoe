@@ -7,7 +7,9 @@ let matrix = [
     [3, 3, 3,],
 ];
 const clearButton = document.querySelector('.clearButton');
+const statusInfo = document.querySelector('.player');
 let gameStatus = undefined;
+let step = 0;
 const winState = [[
         ["x", "x", "x",],
         ["l", "l", "l",],
@@ -16,7 +18,12 @@ const winState = [[
         ["x", "l", "l",],
         ["l", "x", "l",],
         ["l", "l", "x",],
-    ]];
+    ], [
+        ["x", "l", "l",],
+        ["x", "l", "l",],
+        ["x", "l", "l",],
+    ]
+];
 const firstPlayerIcon = () => {
     const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -77,16 +84,27 @@ function render() {
 }
 function checkWinState() {
     let counter = 0;
+    let checkNullCells = false;
+    let counterWinState = [];
     for (let state = 0; state < winState.length; state++) {
+        counter = 0;
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] === 1 && winState[state][i][j] === "x")
+                if (matrix[i][j] === 1 && winState[state][i][j] === "x") {
                     counter += 1;
+                    counterWinState[state] = counter;
+                }
                 // console.log(matrix[i][j]);
+                if (matrix[i][j] !== 3)
+                    checkNullCells = true;
             }
         }
     }
+    if (step === 9) {
+        checkNullCells && statusInfo && (statusInfo.innerHTML = "Ничья");
+    }
     console.log("Найдено: " + counter);
+    console.log(counterWinState);
 }
 function startGame() {
     if (!gameStatus) {
@@ -135,6 +153,7 @@ function cellClick() {
                 gameStatus = 1;
             }
             // removeCells()
+            step += 1;
             render();
             // cellClick()
             console.log(matrix);
