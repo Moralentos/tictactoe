@@ -8,22 +8,214 @@ let matrix = [
 ];
 const clearButton = document.querySelector('.clearButton');
 const statusInfo = document.querySelector('.player');
+const icon = document.querySelector('.icon');
+const playerName = document.querySelectorAll('.player-name');
+// const winBlock = document.querySelector('.win-block')
+// const winLine = document.querySelector('.win-line')
 let gameStatus = undefined;
 let step = 0;
-const winState = [[
-        ["x", "x", "x",],
-        ["l", "l", "l",],
-        ["l", "l", "l",],
-    ], [
-        ["x", "l", "l",],
-        ["l", "x", "l",],
-        ["l", "l", "x",],
-    ], [
-        ["x", "l", "l",],
-        ["x", "l", "l",],
-        ["x", "l", "l",],
-    ]
+let winner = undefined;
+let stateLine = undefined;
+const winState = [
+    // Горизонтальные линии
+    [
+        ["x", "x", "x"],
+        ["l", "l", "l"],
+        ["l", "l", "l"],
+    ],
+    [
+        ["l", "l", "l"],
+        ["x", "x", "x"],
+        ["l", "l", "l"],
+    ],
+    [
+        ["l", "l", "l"],
+        ["l", "l", "l"],
+        ["x", "x", "x"],
+    ],
+    // Вертикальные линии
+    [
+        ["x", "l", "l"],
+        ["x", "l", "l"],
+        ["x", "l", "l"],
+    ],
+    [
+        ["l", "x", "l"],
+        ["l", "x", "l"],
+        ["l", "x", "l"],
+    ],
+    [
+        ["l", "l", "x"],
+        ["l", "l", "x"],
+        ["l", "l", "x"],
+    ],
+    // Диагональные линии
+    [
+        ["x", "l", "l"],
+        ["l", "x", "l"],
+        ["l", "l", "x"],
+    ],
+    [
+        ["l", "l", "x"],
+        ["l", "x", "l"],
+        ["x", "l", "l"],
+    ],
 ];
+function getColorWinLine(winner, winLine) {
+    if (winner === 1) {
+        winLine.style.backgroundColor = "var(--purple)";
+    }
+    if (winner === 2) {
+        winLine.style.backgroundColor = "var(--orange)";
+    }
+}
+function changePlayerName() {
+    playerName.forEach((elem, index) => {
+        elem.addEventListener("input", () => {
+            const text = elem.innerHTML;
+            if (index === 0)
+                elem.style.color = "var(--purple)";
+            if (index === 1)
+                elem.style.color = "var(--orange)";
+            // elem.innerHTML = text
+            console.log(text);
+        });
+    });
+}
+changePlayerName();
+// addClassWinLine(stateLine)
+// addClassWinLine(stateLine)
+function addClassWinLine(line) {
+    if (line === 0) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        getColorWinLine(winner, winLine);
+        winBlock.style.transform = "rotate(90deg)";
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (line === 1) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        getColorWinLine(winner, winLine);
+        winBlock.style.transform = "rotate(90deg)";
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (line === 2) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        getColorWinLine(winner, winLine);
+        winBlock.style.transform = "rotate(90deg)";
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(div2);
+        winBlock.appendChild(winLine);
+        console.log("ASDASFEWF");
+    }
+    if (line === 3) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        // winBlock.style.transform = "rotate(90deg)";
+        getColorWinLine(winner, winLine);
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (line === 4) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        // winBlock.style.transform = "rotate(90deg)";
+        getColorWinLine(winner, winLine);
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (line === 5) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        // winLine.style.height = "100%";
+        // winBlock.style.transform = "rotate(90deg)";
+        getColorWinLine(winner, winLine);
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(div2);
+        winBlock.appendChild(winLine);
+        console.log("ASDASFEWF");
+    }
+    if (line === 6) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        winLine.style.height = "100%";
+        getColorWinLine(winner, winLine);
+        winBlock.style.transform = "rotate(-45deg)";
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (line === 7) {
+        const div1 = document.createElement("div");
+        const div2 = document.createElement("div");
+        const winBlock = document.createElement("div");
+        const winLine = document.createElement("div");
+        winBlock.classList.add("win-block");
+        winLine.classList.add("win-line");
+        winLine.style.height = "100%";
+        winBlock.style.transform = "rotate(45deg)";
+        getColorWinLine(winner, winLine);
+        mainElem && mainElem.appendChild(winBlock);
+        winBlock.appendChild(div1);
+        winBlock.appendChild(winLine);
+        winBlock.appendChild(div2);
+        console.log("ASDASFEWF");
+    }
+    if (!line) { }
+}
 const firstPlayerIcon = () => {
     const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -83,16 +275,30 @@ function render() {
     console.log("gamestatus: " + gameStatus);
 }
 function checkWinState() {
-    let counter = 0;
+    let counterX = 0;
+    let counterO = 0;
     let checkNullCells = false;
-    let counterWinState = [];
+    let counterWinState = [{}];
     for (let state = 0; state < winState.length; state++) {
-        counter = 0;
+        counterX = 0;
+        counterO = 0;
         for (let i = 0; i < matrix.length; i++) {
             for (let j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] === 1 && winState[state][i][j] === "x") {
-                    counter += 1;
-                    counterWinState[state] = counter;
+                    counterX += 1;
+                    counterWinState[state] = Object.assign(Object.assign({}, counterWinState[state]), { "x": counterX });
+                    if (counterX === 3) {
+                        winner = 1;
+                        stateLine = state;
+                    }
+                }
+                if (matrix[i][j] === 0 && winState[state][i][j] === "x") {
+                    counterO += 1;
+                    counterWinState[state] = Object.assign(Object.assign({}, counterWinState[state]), { "o": counterO });
+                    if (counterO === 3) {
+                        winner = 2;
+                        stateLine = state;
+                    }
                 }
                 // console.log(matrix[i][j]);
                 if (matrix[i][j] !== 3)
@@ -103,22 +309,40 @@ function checkWinState() {
     if (step === 9) {
         checkNullCells && statusInfo && (statusInfo.innerHTML = "Ничья");
     }
-    console.log("Найдено: " + counter);
+    // getWinner(counterWinState)
+    // console.log("Найдено: " + counter);
     console.log(counterWinState);
+}
+function getWinner(winner) {
+    if (winner) {
+        statusInfo && (statusInfo.innerHTML = `Победа: ${playerName[gameStatus === 1 ? 1 : 0].innerHTML === "Имя" ? `Игрок ${winner}` : playerName[gameStatus === 1 ? 1 : 0].innerHTML}`);
+        icon && (icon.innerHTML = "🏆");
+        // gameStatus = undefined
+        render();
+        stateLine && addClassWinLine(stateLine);
+        console.log("state:" + stateLine);
+    }
 }
 function startGame() {
     if (!gameStatus) {
         const number = getRandomNumber(1, 2);
         if (number === 1 || number === 2) {
             gameStatus = number;
+            gameStatus && statusInfo && (statusInfo.innerHTML = `Ход: ${playerName[gameStatus === 1 ? 1 : 0].innerHTML === "Имя" ? `Игрок ${gameStatus}` : playerName[gameStatus === 1 ? 1 : 0].innerHTML}`);
+            icon && (icon.innerHTML = "🎮");
             console.log(gameStatus);
         }
         render();
     }
 }
-function EndGame() {
+function endGame() {
     if (gameStatus) {
         gameStatus = undefined;
+        stateLine = undefined;
+        winner = undefined;
+        step = 0;
+        statusInfo && (statusInfo.innerHTML = "Ожидание");
+        icon && (icon.innerHTML = "🕒");
         clearCells();
     }
 }
@@ -143,21 +367,37 @@ function cellClick() {
             const line = getLineCells(index);
             const elem = getElemCells(index);
             if (gameStatus === 1) {
-                if (line !== null && elem !== null)
-                    (matrix[line][elem] = 1);
-                gameStatus = 2;
+                if (line !== null && elem !== null) {
+                    if (matrix[line][elem] === 3) {
+                        matrix[line][elem] = 1;
+                        gameStatus = 2;
+                        step += 1;
+                        render();
+                        gameStatus && statusInfo && (statusInfo.innerHTML = `Ход: ${playerName[gameStatus === 2 ? 0 : 1].innerHTML === "Имя" ? `Игрок ${gameStatus}` : playerName[gameStatus === 2 ? 0 : 1].innerHTML}`);
+                        checkWinState();
+                        getWinner(winner);
+                        addClassWinLine(stateLine);
+                        // cellClick()
+                        console.log(winner);
+                    }
+                }
             }
             else if (gameStatus === 2) {
-                if (line !== null && elem !== null)
-                    (matrix[line][elem] = 0);
-                gameStatus = 1;
+                if (line !== null && elem !== null) {
+                    if (matrix[line][elem] === 3) {
+                        matrix[line][elem] = 0;
+                        gameStatus = 1;
+                        step += 1;
+                        render();
+                        gameStatus && statusInfo && (statusInfo.innerHTML = `Ход: ${playerName[gameStatus === 1 ? 1 : 0].innerHTML === "Имя" ? `Игрок ${gameStatus}` : playerName[gameStatus === 1 ? 1 : 0].innerHTML}`);
+                        checkWinState();
+                        getWinner(winner);
+                        addClassWinLine(stateLine);
+                        // cellClick()
+                        console.log(winner);
+                    }
+                }
             }
-            // removeCells()
-            step += 1;
-            render();
-            // cellClick()
-            console.log(matrix);
-            checkWinState();
         });
     });
 }
