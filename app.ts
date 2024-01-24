@@ -1,4 +1,5 @@
 const mainElem: HTMLElement | null = document.querySelector('#mainElem')
+const elem1: HTMLElement | null = document.querySelector('.el')
 let firstRender = false;
 let matrix: number[][] = [
     [3, 3, 3,],
@@ -106,7 +107,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         getColorWinLine(winner, winLine)
         winBlock.style.transform = "rotate(90deg)";
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div1)
         winBlock.appendChild(div2)
@@ -122,7 +123,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         getColorWinLine(winner, winLine)
         winBlock.style.transform = "rotate(90deg)";
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div2)
@@ -138,7 +139,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         getColorWinLine(winner, winLine)
         winBlock.style.transform = "rotate(90deg)";
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(div2)
         winBlock.appendChild(winLine)
@@ -154,7 +155,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         // winBlock.style.transform = "rotate(90deg)";
         getColorWinLine(winner, winLine)
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div1)
         winBlock.appendChild(div2)
@@ -170,7 +171,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         // winBlock.style.transform = "rotate(90deg)";
         getColorWinLine(winner, winLine)
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div2)
@@ -186,7 +187,7 @@ function addClassWinLine(line: number | undefined) {
         // winLine.style.height = "100%";
         // winBlock.style.transform = "rotate(90deg)";
         getColorWinLine(winner, winLine)
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(div2)
         winBlock.appendChild(winLine)
@@ -202,7 +203,7 @@ function addClassWinLine(line: number | undefined) {
         winLine.style.height = "100%";
         getColorWinLine(winner, winLine)
         winBlock.style.transform = "rotate(-45deg)";
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div2)
@@ -218,7 +219,7 @@ function addClassWinLine(line: number | undefined) {
         winLine.style.height = "100%";
         winBlock.style.transform = "rotate(45deg)";
         getColorWinLine(winner, winLine)
-        mainElem && mainElem.appendChild(winBlock)
+        elem1 && elem1.appendChild(winBlock)
         winBlock.appendChild(div1)
         winBlock.appendChild(winLine)
         winBlock.appendChild(div2)
@@ -281,7 +282,7 @@ const blockDivCreate = (elem: number): void => {
 
         const blockDiv = document.createElement('div')
         blockDiv.classList.add("block");
-        mainElem.appendChild(blockDiv);
+        elem1 && elem1.appendChild(blockDiv);
 
         svg && blockDiv.appendChild(svg);
 
@@ -293,7 +294,7 @@ const blockDivCreate = (elem: number): void => {
 
 function render(): void {
 
-    mainElem && (mainElem.innerHTML = '');
+    elem1 && (elem1.innerHTML = '');
 
     matrix.map((line) => {
         line.map((elem) => {
