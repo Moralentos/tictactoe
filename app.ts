@@ -230,7 +230,7 @@ function addClassWinLine(line: number | undefined) {
 
 }
 
-const firstPlayerIcon = (): SVGSVGElement => {
+const secondPlayerIcon = (): HTMLDivElement => {
     const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -242,13 +242,22 @@ const firstPlayerIcon = (): SVGSVGElement => {
     newSVG.setAttribute("viewBox", "0 0 24 24");
     newSVG.setAttribute("stroke-width", "2.5");
     newSVG.setAttribute("stroke", "#ffae12");
+    newSVG.setAttribute("width", "100%");  // Добавьте эту строку
+    newSVG.setAttribute("height", "100%");  // И эту строку
     newSVG.classList.add("w-6", "h-6");
     newSVG.appendChild(newPath);
 
-    return newSVG;
+    const div = document.createElement("div")
+    const divIcon = document.createElement("div")
+    div.classList.add("player-icon-block")
+    divIcon.classList.add("playerIcon1")
+    div.appendChild(divIcon)
+
+
+    return div;
 }
 
-const secondPlayerIcon = (): SVGSVGElement => {
+const firstPlayerIcon = (): SVGSVGElement => {
     const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svgElement.setAttribute("fill", "none");
@@ -257,6 +266,8 @@ const secondPlayerIcon = (): SVGSVGElement => {
     svgElement.setAttribute("stroke", "currentColor");
     svgElement.setAttribute("class", "w-6 h-6");
     svgElement.setAttribute("style", "color: #7321db;");
+    svgElement.setAttribute("width", "100%");  // Добавьте эту строку
+    svgElement.setAttribute("height", "100%");  // И эту строку
 
     const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
     pathElement.setAttribute("stroke-linecap", "round");
@@ -272,9 +283,13 @@ const secondPlayerIcon = (): SVGSVGElement => {
 const blockDivCreate = (elem: number): void => {
     if (mainElem) {
 
-        const getIcon = (number: number): SVGSVGElement | null => {
-            if (number === 0) return firstPlayerIcon();
-            if (number === 1) return secondPlayerIcon();
+        const emptyCell = document.createElement('div')
+        emptyCell.classList.add('block-empty')
+
+        const getIcon = (number: number): SVGSVGElement | HTMLDivElement | null => {
+            if (number === 0) return secondPlayerIcon();
+            if (number === 1) return firstPlayerIcon();
+            if (number === 3) return emptyCell
             return null
         }
 

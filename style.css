@@ -112,6 +112,22 @@ main {
   align-items: center;
   position: relative;
 }
+
+.player-icon-block {
+  width: 100%;
+  height: 100%;
+}
+.playerIcon1 {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border-radius: 100%;
+}
+.block-empty {
+  width: 100%;
+  height: 100%;
+}
+
 .el {
   /* height: 500px;
   width: 500px; */
