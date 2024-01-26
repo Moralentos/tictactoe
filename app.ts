@@ -230,7 +230,7 @@ function addClassWinLine(line: number | undefined) {
 
 }
 
-const secondPlayerIcon = (): HTMLDivElement => {
+const secondPlayerIcon = (): SVGSVGElement => {
     const newSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -246,15 +246,7 @@ const secondPlayerIcon = (): HTMLDivElement => {
     newSVG.setAttribute("height", "100%");  // И эту строку
     newSVG.classList.add("w-6", "h-6");
     newSVG.appendChild(newPath);
-
-    const div = document.createElement("div")
-    const divIcon = document.createElement("div")
-    div.classList.add("player-icon-block")
-    divIcon.classList.add("playerIcon1")
-    div.appendChild(divIcon)
-
-
-    return div;
+    return newSVG;
 }
 
 const firstPlayerIcon = (): SVGSVGElement => {
@@ -278,18 +270,40 @@ const firstPlayerIcon = (): SVGSVGElement => {
     return svgElement;
 }
 
+const emptyCell = (): SVGSVGElement => {
+    const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgElement.setAttribute("fill", "none");
+    svgElement.setAttribute("viewBox", "0 0 24 24");
+    svgElement.setAttribute("stroke-width", "2.5");
+    svgElement.setAttribute("stroke", "currentColor");
+    svgElement.setAttribute("class", "w-6 h-6");
+    // svgElement.setAttribute("style", "color: var(--white);");
+    svgElement.setAttribute("width", "100%");  // Добавьте эту строку
+    svgElement.setAttribute("height", "100%");  // И эту строку
+    svgElement.classList.add("svg-empty")
+
+    const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    pathElement.setAttribute("stroke-linecap", "round");
+    pathElement.setAttribute("stroke-linejoin", "round");
+    pathElement.setAttribute("d", "M6 18 18 6M6 6l12 12");
+    // pathElement.setAttribute("style", "stroke: var(--white);");
+    svgElement.appendChild(pathElement);
+    return svgElement;
+}
+
 
 
 const blockDivCreate = (elem: number): void => {
     if (mainElem) {
 
-        const emptyCell = document.createElement('div')
-        emptyCell.classList.add('block-empty')
+        // const emptyCell = document.createElement('div')
+        // emptyCell.classList.add('block-empty')
 
-        const getIcon = (number: number): SVGSVGElement | HTMLDivElement | null => {
+        const getIcon = (number: number): SVGSVGElement | null => {
             if (number === 0) return secondPlayerIcon();
             if (number === 1) return firstPlayerIcon();
-            if (number === 3) return emptyCell
+            if (number === 3) return emptyCell()
             return null
         }
 
@@ -305,6 +319,20 @@ const blockDivCreate = (elem: number): void => {
     }
 }
 
+function toggleButtonStatus() {
+    const clearBtn = document.querySelector(".clearButton")
+    const startBtn = document.querySelector(".startButton")
+
+    if (!gameStatus) {
+        clearBtn && clearBtn.setAttribute(`disabled`, 'true')
+        startBtn && startBtn.removeAttribute(`disabled`)
+    } else {
+        clearBtn && clearBtn.removeAttribute(`disabled`)
+        startBtn && startBtn.setAttribute(`disabled`, 'true')
+    }
+
+
+}
 
 
 function render(): void {
@@ -319,6 +347,7 @@ function render(): void {
         })
     })
     cellClick()
+    toggleButtonStatus()
 
     console.log("gamestatus: " + gameStatus);
 }
